@@ -21,6 +21,7 @@ end
 
 --- TELESCOPE ---
 map("n", "<leader>f", function() require("telescope.builtin").find_files() end, opts)
+map("n", "<leader>r", function() require("telescope.builtin").live_grep()  end, opts)
 
 --- SNACKS ---
 map("n", "<leader>e", function()
@@ -58,8 +59,6 @@ map("n", "<leader>n", function() mark.add_file() end, opts)
 -- Jump to Harpoon slots 1–8 using <C-h> to <C-L>
 local nav_keys = { "h", "j", "k", "l", "H", "J", "K", "L" }
 for i, key in ipairs(nav_keys) do
-  map("n", "<leader>".. key, function()
-    ui.nav_file(i)
-  end, opts)
+  map("n", "<leader>".. key, function() ui.nav_file(i) end, opts)
 end
 
