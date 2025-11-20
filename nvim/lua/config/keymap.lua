@@ -39,8 +39,12 @@ map("n", "<leader>e", function()
       callback = function()
         local current_win = vim.api.nvim_get_current_win()
         if current_win ~= sidebar_win and vim.api.nvim_win_is_valid(sidebar_win) then
-          -- Close the sidebar *window* only, do not delete any buffer
-          vim.api.nvim_win_close(sidebar_win, true)
+          -- Close the sidebar window only when it's not the last window,
+          -- and ignore errors like E444 ("Cannot close last window").
+          local wins = vim.api.nvim_list_wins()
+          if #wins > 1 then
+            pcall(vim.api.nvim_win_close, sidebar_win, true)
+          end
         end
       end,
       once = true,
@@ -61,4 +65,3 @@ local nav_keys = { "h", "j", "k", "l", "H", "J", "K", "L" }
 for i, key in ipairs(nav_keys) do
   map("n", "<leader>".. key, function() ui.nav_file(i) end, opts)
 end
-

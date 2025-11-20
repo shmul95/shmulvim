@@ -3,6 +3,12 @@ local fn = vim.fn
 local config_path = fn.stdpath('config')            -- e.g. ~/.config/nvim
 local lua_path    = config_path .. '/lua'
 
+vim.opt.number = true -- Show line numbers
+vim.opt.relativenumber = true -- Relative line numbers
+vim.opt.tabstop = 4 -- Tab size
+vim.opt.expandtab = true -- Use spaces instead of tabs
+vim.opt.shiftwidth = 4 -- Auto-indent width
+
 -- Append the system clipboard (“+” register) to the unnamed registers
 vim.o.clipboard = "unnamedplus"
 
@@ -62,3 +68,7 @@ require("lazy").setup("plugins")
 require("config.option")
 require("config.keymap")
 
+-- Ensure LSP request compatibility so completion doesn't error on bufnr
+pcall(function()
+  require("compat.lsp").setup()
+end)
