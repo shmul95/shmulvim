@@ -10,13 +10,25 @@ This setup features:
 
 ---
 
-## 📦 Installation
+## 📦 Installation (fresh machine)
 
-```bash
-git clone --recurse-submodules https://github.com/shmul95/shmulvim.git
-cd shmulvim
-./install.sh
-```
+1. Clone this repo:
+   ```bash
+   git clone --recurse-submodules https://github.com/shmul95/shmulvim.git
+   cd shmulvim
+   ```
+2. Run the installer:
+   ```bash
+   chmod +x install.sh
+   ./install.sh
+   ```
+
+The script will:
+
+* Install Neovim (and tools like `git` and `ripgrep`) using your system package manager, if `nvim` isn’t already installed.
+* Create `~/.config` if needed.
+* Backup any existing `~/.config/nvim` directory to `~/.config/nvim.backup.<timestamp>`.
+* Symlink this repo’s `nvim/` directory to `~/.config/nvim`.
 
 ---
 
