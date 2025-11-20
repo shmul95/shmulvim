@@ -17,7 +17,7 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter", "BufReadPost", "BufNewF
   callback = function(args)
     -- Only adjust real file buffers
     local bufnr = args.buf
-    if vim.bo[bufnr].buftype == "" and vim.fn.buflisted(bufnr) == 1 then
+    if vim.bo[bufnr].buftype == "" then
       -- Window-local options: set them for the current window
       vim.wo.number = true
       vim.wo.relativenumber = true

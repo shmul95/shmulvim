@@ -26,30 +26,8 @@ map("n", "<leader>r", function() require("telescope.builtin").live_grep()  end, 
 --- SNACKS ---
 map("n", "<leader>e", function()
   local snacks = require("snacks")
-
-  -- Open Snacks explorer in a vertical split (or floating, depending on config)
-  snacks.picker.explorer()
-
-  -- Wait until it's rendered
-  vim.schedule(function()
-    local sidebar_win = vim.api.nvim_get_current_win()
-
-    -- Create autocmd that runs when focus moves away from the sidebar
-    vim.api.nvim_create_autocmd("WinEnter", {
-      callback = function()
-        local current_win = vim.api.nvim_get_current_win()
-        if current_win ~= sidebar_win and vim.api.nvim_win_is_valid(sidebar_win) then
-          -- Close the sidebar window only when it's not the last window,
-          -- and ignore errors like E444 ("Cannot close last window").
-          local wins = vim.api.nvim_list_wins()
-          if #wins > 1 then
-            pcall(vim.api.nvim_win_close, sidebar_win, true)
-          end
-        end
-      end,
-      once = true,
-    })
-  end)
+  -- Open Snacks explorer; plugin handles layout (sidebar / float) itself
+  snacks.explorer.open()
 end, opts)
 
 --- HARPOON ---
