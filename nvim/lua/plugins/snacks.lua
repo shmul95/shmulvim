@@ -8,7 +8,15 @@ return {
   opts = {
     -- enable only the explorer and the picker core
     explorer = { enabled = true },
-    picker   = { enabled = true },
+    picker   = {
+      enabled = true,
+      sources = {
+        explorer = {
+          -- close the explorer when opening a file
+          auto_close = true,
+          jump = { close = true },
+        },
+      },
+    },
   },
 }
-
