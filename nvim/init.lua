@@ -64,6 +64,14 @@ end
 vim.o.termguicolors = true
 vim.opt.rtp:prepend(lazypath)
 
+-- auto cargo fmt for rust files
+vim.api.nvim_create_autocmd("BufWritePost", {
+    pattern = "*.rs",
+    callback = function ()
+        vim.fn.jobstart("cargo fmt")
+    end,
+})
+
 require("lazy").setup("plugins")
 require("config.option")
 require("config.keymap")
