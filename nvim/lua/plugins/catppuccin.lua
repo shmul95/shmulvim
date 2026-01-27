@@ -3,6 +3,7 @@ return {
   "catppuccin/nvim",
   name = "catppuccin",
   priority = 1000,
+  lazy = false,  -- Load immediately to ensure colorscheme is available
   config = function()
     require("catppuccin").setup({
       flavour = "mocha", -- or "latte", "frappe", "macchiato"
@@ -48,5 +49,13 @@ return {
     })
 
     vim.cmd.colorscheme("catppuccin")
+    
+    -- Ensure colorscheme is applied immediately
+    vim.api.nvim_create_autocmd("VimEnter", {
+      group = vim.api.nvim_create_augroup("catppuccin_ensure", { clear = true }),
+      callback = function()
+        vim.cmd.colorscheme("catppuccin")
+      end,
+    })
   end,
 }
