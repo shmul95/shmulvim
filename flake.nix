@@ -10,10 +10,14 @@
   outputs = { self, nixpkgs, flake-utils, nvf, ... }:
     flake-utils.lib.eachDefaultSystem (system:
       let
+        pkgs = nixpkgs.legacyPackages.${system};
         shmulvim =
           (nvf.lib.neovimConfiguration {
-            pkgs = nixpkgs.legacyPackages.${system};
-            modules = [ ./shmulvim.nix ];
+            inherit pkgs;
+            modules = [
+              ./shmulvim.nix
+              ./telescope.nix
+            ];
           }).neovim;
       in { packages.default = shmulvim; }
     );
