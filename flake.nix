@@ -15,8 +15,8 @@
           (nvf.lib.neovimConfiguration {
             inherit pkgs;
             modules = [
-              ./shmulvim.nix
-              ./telescope.nix
+              ./nix/config.nix
+              ./nix/telescope.nix
             ];
           }).neovim;
       in { packages.default = shmulvim; }
