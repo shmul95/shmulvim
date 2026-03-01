@@ -17,9 +17,12 @@
             modules = [
               ./nix/config.nix
               ./nix/globals.nix
+
               ./nix/harpoon.nix
               ./nix/telescope.nix
               ./nix/treesitter.nix
+
+              ./nix/harpoon-extension.nix
             ];
           }).neovim;
       in { packages.default = shmulvim; }
