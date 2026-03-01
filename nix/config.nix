@@ -13,12 +13,6 @@
 
     lazy.enable = true;
 
-    terminal.toggleterm.lazygit = {
-      enable = true;
-      mappings.open = "<leader>g";
-      direction = "float";
-    };
-
     # snacks.enable = true;
     # copilot.enable = true;
   };
