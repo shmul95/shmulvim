@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  theme = {
+  vim.theme = {
     enable = true;
     name = "dracula";
     # don't work for some reason
