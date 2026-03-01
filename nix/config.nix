@@ -6,15 +6,19 @@
     autocomplete.nvim-cmp.enable = true;
     lsp.enable = true;
 
-    # theme 
     theme = {
       enable = true;
-      name = "monokai";
+      name = "dracula";
     };
 
-    # try
-    # lazygit.enable = true;
     lazy.enable = true;
+
+    terminal.toggleterm.lazygit = {
+      enable = true;
+      mappings.open = "<leader>g";
+      direction = "float";
+    };
+
     # snacks.enable = true;
     # copilot.enable = true;
   };

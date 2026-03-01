@@ -18,11 +18,13 @@
               ./nix/config.nix
               ./nix/globals.nix
 
+              ./nix/lazygit.nix
               ./nix/harpoon.nix
               ./nix/telescope.nix
               ./nix/treesitter.nix
 
-              ./nix/monokai.nix
+              # wanted to use it but can't figure out how
+              # ./nix/monokai.nix 
 
               ./nix/harpoon-extension.nix
             ];
