@@ -17,6 +17,7 @@
             modules = [
               ./nix/config.nix
               ./nix/globals.nix
+              ./nix/theme.nix
 
               ./nix/copilot.nix
 
