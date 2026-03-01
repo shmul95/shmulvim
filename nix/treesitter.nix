@@ -8,6 +8,6 @@
     clang.enable = true;
     rust.enable = true;
     haskell.enable = true;
-    assembly = true;
+    assembly.enable = true;
   };
 }
