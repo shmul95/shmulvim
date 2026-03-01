@@ -18,6 +18,9 @@
               ./nix/config.nix
               ./nix/globals.nix
 
+              ./nix/assistant.nix
+
+              ./nix/lazygit.nix
               ./nix/harpoon.nix
               ./nix/telescope.nix
               ./nix/treesitter.nix
