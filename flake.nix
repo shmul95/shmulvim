@@ -18,7 +18,7 @@
               ./nix/config.nix
               ./nix/globals.nix
 
-              ./nix/assistant.nix
+              ./nix/copilot.nix
 
               ./nix/lazygit.nix
               ./nix/harpoon.nix
