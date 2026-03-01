@@ -22,6 +22,8 @@
               ./nix/telescope.nix
               ./nix/treesitter.nix
 
+              ./nix/monokai.nix
+
               ./nix/harpoon-extension.nix
             ];
           }).neovim;
