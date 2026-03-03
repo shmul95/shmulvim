@@ -6,8 +6,6 @@
 
     extraLuaFiles = [
       ./lua/keymap.lua
-      ./lua/gitsigns.lua
-      ./lua/snacks.lua
     ];
   };
 }

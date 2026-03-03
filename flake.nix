@@ -25,6 +25,8 @@
               ./nix/harpoon.nix
               ./nix/telescope.nix
               ./nix/treesitter.nix
+              ./nix/gitsigns.nix
+              ./nix/snacks.nix
 
               # wanted to use it but can't figure out how
               # ./nix/monokai.nix 
