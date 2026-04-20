@@ -9,7 +9,7 @@
       shiftwidth = 4; # but 2 for yml, nix, etc
     };
 
-    opts = {
+    options = {
       scrolloff = 5;
     };
 
