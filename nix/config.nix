@@ -15,6 +15,10 @@
       shiftwidth = 4; # but 2 for yml, nix, etc
     };
 
+    opts = {
+      scrolloff = 5;
+    };
+
     extraLuaFiles = [
       ./lua/keymap.lua
     ];
