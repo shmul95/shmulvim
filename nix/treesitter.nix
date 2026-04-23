@@ -7,6 +7,7 @@
     python.enable = true;
     clang.enable = true;
     rust.enable = true;
+    bash.enable = true;
     # haskell.enable = true;  # Disabled to save ~13GB (HLS + toolchain)
     assembly.enable = true;
   };
