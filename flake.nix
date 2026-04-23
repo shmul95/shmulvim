@@ -34,5 +34,8 @@
             ];
           }).neovim;
       in { packages.default = shmulvim; }
-    );
+    )
+    // {
+      homeManagerModules.default = import ./home-manager.nix { inherit nvf; };
+    };
 }
