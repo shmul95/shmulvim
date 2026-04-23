@@ -14,19 +14,16 @@ let
       lsp.enable = true;
       lazy.enable = true;
 
-      clipboard = {
-        enable = cfg.clipboard.enable;
-        providers.wl-copy.enable = cfg.clipboard.provider == "wl-copy";
-        providers.xclip.enable   = cfg.clipboard.provider == "xclip";
-        registers = cfg.clipboard.register;
-      };
-
       globals = {
         mapleader = cfg.leader;
         shiftwidth = cfg.shiftwidth;
+        shmulvim_clipboard_provider = cfg.clipboard.provider;
+        shmulvim_clipboard_register = cfg.clipboard.register;
       };
 
-      extraLuaFiles = [ ./nix/lua/keymap.lua ];
+      extraLuaFiles =
+        optional cfg.clipboard.enable ./nix/lua/clipboard.lua
+        ++ [ ./nix/lua/keymap.lua ];
     };
   };
 
@@ -212,9 +209,9 @@ in {
         default = true;
       };
       provider = mkOption {
-        type    = types.enum [ "wl-copy" "xclip" ];
-        default = "wl-copy";
-        description = "System clipboard provider. Use xclip for X11.";
+        type    = types.enum [ "auto" "wl-copy" "xclip" "clip.exe" "win32yank.exe" ];
+        default = "auto";
+        description = "Clipboard provider. `auto` prefers Windows clipboard on WSL, then Wayland, then xclip.";
       };
       register = mkOption {
         type    = types.str;

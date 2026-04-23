@@ -1,4 +1,6 @@
 local uv = vim.uv or vim.loop
+local configured_provider = vim.g.shmulvim_clipboard_provider or "auto"
+local configured_register = vim.g.shmulvim_clipboard_register or "unnamedplus"
 
 local function executable(cmd)
   return vim.fn.executable(cmd) == 1
@@ -39,9 +41,13 @@ local function can_use_xclip()
   return display and display ~= "" and executable("xclip")
 end
 
-if can_use_wayland() then
-  vim.opt.clipboard = "unnamedplus"
-  vim.g.clipboard = {
+local function set_clipboard(definition)
+  vim.opt.clipboard = configured_register
+  vim.g.clipboard = definition
+end
+
+local function use_wayland()
+  set_clipboard({
     name = "smart-wl-clipboard",
     copy = {
       ["+"] = { "wl-copy", "--foreground", "--type", "text/plain" },
@@ -52,10 +58,11 @@ if can_use_wayland() then
       ["*"] = { "wl-paste", "--no-newline", "--primary" },
     },
     cache_enabled = 0,
-  }
-elseif can_use_win32yank() then
-  vim.opt.clipboard = "unnamedplus"
-  vim.g.clipboard = {
+  })
+end
+
+local function use_win32yank()
+  set_clipboard({
     name = "smart-win32yank-clipboard",
     copy = {
       ["+"] = { "win32yank.exe", "-i", "--crlf" },
@@ -66,10 +73,11 @@ elseif can_use_win32yank() then
       ["*"] = { "win32yank.exe", "-o", "--lf" },
     },
     cache_enabled = 0,
-  }
-elseif can_use_windows_clipboard() then
-  vim.opt.clipboard = "unnamedplus"
-  vim.g.clipboard = {
+  })
+end
+
+local function use_windows_clipboard()
+  set_clipboard({
     name = "smart-windows-clipboard",
     copy = {
       ["+"] = { "clip.exe" },
@@ -80,10 +88,11 @@ elseif can_use_windows_clipboard() then
       ["*"] = { "powershell.exe", "-NoProfile", "-Command", "Get-Clipboard -Raw" },
     },
     cache_enabled = 0,
-  }
-elseif can_use_xclip() then
-  vim.opt.clipboard = "unnamedplus"
-  vim.g.clipboard = {
+  })
+end
+
+local function use_xclip()
+  set_clipboard({
     name = "smart-xclip-clipboard",
     copy = {
       ["+"] = { "xclip", "-quiet", "-i", "-selection", "clipboard" },
@@ -94,5 +103,23 @@ elseif can_use_xclip() then
       ["*"] = { "xclip", "-o", "-selection", "primary" },
     },
     cache_enabled = 0,
-  }
+  })
+end
+
+if configured_provider == "wl-copy" and can_use_wayland() then
+  use_wayland()
+elseif configured_provider == "win32yank.exe" and can_use_win32yank() then
+  use_win32yank()
+elseif configured_provider == "clip.exe" and can_use_windows_clipboard() then
+  use_windows_clipboard()
+elseif configured_provider == "xclip" and can_use_xclip() then
+  use_xclip()
+elseif configured_provider == "auto" and can_use_win32yank() then
+  use_win32yank()
+elseif configured_provider == "auto" and can_use_windows_clipboard() then
+  use_windows_clipboard()
+elseif configured_provider == "auto" and can_use_wayland() then
+  use_wayland()
+elseif configured_provider == "auto" and can_use_xclip() then
+  use_xclip()
 end
