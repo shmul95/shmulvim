@@ -14,6 +14,10 @@ let
       lsp.enable = true;
       lazy.enable = true;
 
+      options = {
+        scrolloff = cfg.scrolloff;
+      };
+
       globals = {
         mapleader = cfg.leader;
         shiftwidth = cfg.shiftwidth;
@@ -228,6 +232,11 @@ in {
     shiftwidth = mkOption {
       type    = types.int;
       default = 4;
+    };
+
+    scrolloff = mkOption {
+      type    = types.int;
+      default = 5;
     };
 
     theme = {
