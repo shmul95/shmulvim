@@ -47,17 +47,21 @@ local function set_clipboard(definition)
 end
 
 local function use_wayland()
+  -- Note: `wl-copy --foreground` would keep the selection alive after nvim
+  -- exits, but without a clipboard manager (cliphist, wl-clip-persist, …) the
+  -- per-yank wl-copy processes pile up and nvim hangs on :q. Run wl-copy
+  -- detached and rely on the compositor / clipboard manager for persistence.
   set_clipboard({
     name = "smart-wl-clipboard",
     copy = {
-      ["+"] = { "wl-copy", "--foreground", "--type", "text/plain" },
-      ["*"] = { "wl-copy", "--foreground", "--primary", "--type", "text/plain" },
+      ["+"] = { "wl-copy", "--type", "text/plain" },
+      ["*"] = { "wl-copy", "--primary", "--type", "text/plain" },
     },
     paste = {
       ["+"] = { "wl-paste", "--no-newline" },
       ["*"] = { "wl-paste", "--no-newline", "--primary" },
     },
-    cache_enabled = 0,
+    cache_enabled = 1,
   })
 end
 
