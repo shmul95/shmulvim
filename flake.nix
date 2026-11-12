@@ -18,8 +18,6 @@
               ./nix/config.nix
               ./nix/theme.nix
 
-              ./nix/copilot.nix
-
               ./nix/lazygit.nix
               ./nix/harpoon.nix
               ./nix/telescope.nix

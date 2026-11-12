@@ -42,17 +42,6 @@ let
     };
   };
 
-  copilotModule = {
-    vim.assistant.copilot = {
-      enable = true;
-      setupOpts.suggestion = {
-        enabled      = true;
-        auto_trigger = cfg.copilot.autoTrigger;
-        keymap       = cfg.copilot.keymaps;
-      };
-    };
-  };
-
   lazygitModule = {
     vim.terminal.toggleterm = {
       enable = true;
@@ -182,7 +171,6 @@ let
 
   nvfModules =
     [ coreModule themeModule treesitterModule ]
-    ++ optional cfg.copilot.enable  copilotModule
     ++ optional cfg.lazygit.enable  lazygitModule
     ++ optional cfg.harpoon.enable  harpoonModule
     ++ optional cfg.harpoon.enable  harpoonExtensionModule
@@ -270,24 +258,6 @@ in {
       enableTreesitter = mkOption {
         type    = types.bool;
         default = true;
-      };
-    };
-
-    copilot = {
-      enable = mkOption { type = types.bool; default = true; };
-      autoTrigger = mkOption {
-        type    = types.bool;
-        default = true;
-        description = "Show copilot suggestions automatically as you type.";
-      };
-      keymaps = mkOption {
-        type    = types.attrsOf types.str;
-        default = {
-          accept  = "<C-l>";
-          next    = "<C-j>";
-          prev    = "<C-k>";
-          dismiss = "<C-h>";
-        };
       };
     };
 
