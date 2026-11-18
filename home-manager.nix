@@ -88,7 +88,9 @@ let
         keys = [
           (lib.nvim.binds.mkKeymap "n"
             config.vim.navigation.harpoon.mappings.clearMarks
-            "<Cmd>lua require('harpoon.mark').clear_all()<CR>"
+            # harpoon2 API — the old `require('harpoon.mark').clear_all()`
+            # targets harpoon v1, whose submodules don't exist here.
+            "<Cmd>lua require('harpoon'):list():clear()<CR>"
             { desc = "Clear Marks [Harpoon]"; })
         ];
       };
