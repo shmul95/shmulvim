@@ -73,7 +73,13 @@ let
   # module system resolves lib.nvim.binds correctly.
   harpoonExtensionModule = { config, lib, ... }: {
     options.vim.navigation.harpoon.mappings = {
+      # nvf's mkMappingOption now takes the plugin name first
+      # (pluginName: description: default: ...). The old two-argument call
+      # returns a partially applied function instead of an option, which
+      # surfaces as "trying to define a value of type string rather than an
+      # attribute set for vim.navigation.harpoon.mappings.clearMarks".
       clearMarks = lib.nvim.binds.mkMappingOption
+        "Harpoon"
         "Clear all marks [Harpoon]"
         cfg.harpoon.keymaps.clearMarks;
     };
